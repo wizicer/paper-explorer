@@ -9,6 +9,9 @@ import {
   ChevronRight,
   Download,
   Copy,
+  FileText,
+  Presentation,
+  BookOpen,
 } from 'lucide-react';
 import type { Paper, Category, RankFilter, SortConfig } from '@/types';
 import { cn } from '@/lib/utils';
@@ -212,6 +215,14 @@ export function PapersTable({
     return sort.direction === 'asc' 
       ? <ArrowUp className="h-4 w-4 ml-1" />
       : <ArrowDown className="h-4 w-4 ml-1" />;
+  };
+
+  const getTypeIcon = (type?: string) => {
+    if (!type) return <BookOpen className="h-4 w-4 text-muted-foreground" />;
+    const lowerType = type.toLowerCase();
+    if (lowerType === 'article') return <FileText className="h-4 w-4 text-blue-500" />;
+    if (lowerType === 'inproceedings') return <Presentation className="h-4 w-4 text-purple-500" />;
+    return <BookOpen className="h-4 w-4 text-muted-foreground" />;
   };
 
   return (
@@ -423,19 +434,24 @@ export function PapersTable({
                             </Tooltip>
                           </div>
                           <div className="flex-1">
-                            <span className="leading-tight">
-                              {highlightText(paper.title, positiveTokens)}
-                            </span>
-                            {paper.pub && (
-                              <Tooltip>
-                                <TooltipTrigger asChild>
-                                  <Badge variant="outline" className="ml-2 text-xs">
-                                    {paper.pub}
-                                  </Badge>
-                                </TooltipTrigger>
-                                <TooltipContent>{paper.publisher}</TooltipContent>
-                              </Tooltip>
-                            )}
+                            <div className="flex items-start gap-2">
+                              {getTypeIcon(paper.type)}
+                              <div className="flex-1">
+                                <span className="leading-tight">
+                                  {highlightText(paper.title, positiveTokens)}
+                                </span>
+                                {paper.pub && (
+                                  <Tooltip>
+                                    <TooltipTrigger asChild>
+                                      <Badge variant="outline" className="ml-2 text-xs">
+                                        {paper.pub}
+                                      </Badge>
+                                    </TooltipTrigger>
+                                    <TooltipContent>{paper.publisher}</TooltipContent>
+                                  </Tooltip>
+                                )}
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </TableCell>
@@ -490,9 +506,11 @@ export function PapersTable({
                             <div className="text-sm">
                               <span className="font-medium">Publisher:</span> {paper.publisher}
                             </div>
-                            <div className="text-sm">
-                              <span className="font-medium">Type:</span> {paper.type}
-                            </div>
+                            {paper.type && (paper.type.toLowerCase() !== 'inproceedings' && paper.type.toLowerCase() !== 'article') && (
+                              <div className="text-sm">
+                                <span className="font-medium">Type:</span> {paper.type}
+                              </div>
+                            )}
                             <div className="text-sm">
                               <span className="font-medium">DOI:</span>{" "}
                               <a
