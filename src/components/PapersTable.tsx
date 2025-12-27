@@ -461,9 +461,9 @@ export function PapersTable({
                           <Badge
                             variant={paper.rank === 'A' ? 'default' : 'secondary'}
                             className={cn(
-                              paper.rank === 'A' && 'bg-green-600',
-                              paper.rank === 'B' && 'bg-blue-500',
-                              paper.rank === 'C' && 'bg-orange-500'
+                              paper.rank === 'A' && 'bg-blue-700 text-white',
+                              paper.rank === 'B' && 'bg-blue-500 text-white',
+                              paper.rank === 'C' && 'bg-blue-300 text-white'
                             )}
                           >
                             {paper.rank}
