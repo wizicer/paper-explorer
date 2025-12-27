@@ -8,6 +8,7 @@ import {
   ChevronDown,
   ChevronRight,
   Download,
+  Copy,
 } from 'lucide-react';
 import type { Paper, Category, RankFilter, SortConfig } from '@/types';
 import { cn } from '@/lib/utils';
@@ -502,6 +503,21 @@ export function PapersTable({
                               >
                                 {paper.doi}
                               </a>
+                            </div>
+                            <div className="text-sm">
+                              <span className="font-medium">Citation:</span>{" "}
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                className="h-6 px-2 text-xs gap-1"
+                                onClick={() => {
+                                  const citation = `${paper.title} ${paper.publisher}@${paper.year}. ${paper.doi}`;
+                                  navigator.clipboard.writeText(citation);
+                                }}
+                              >
+                                <Copy className="h-3 w-3" />
+                                Copy
+                              </Button>
                             </div>
                           </div>
                         </TableCell>
