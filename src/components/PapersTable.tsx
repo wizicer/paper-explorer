@@ -286,6 +286,29 @@ export function PapersTable({
             Showing {paginatedPapers.length} of {filteredPapers.length} papers
             {filteredPapers.length !== papers.length && ` (${papers.length} total)`}
           </span>
+          {totalPages > 1 && (
+            <div className="flex items-center gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setPage(p => Math.max(1, p - 1))}
+                disabled={page === 1}
+              >
+                Previous
+              </Button>
+              <span className="text-sm text-muted-foreground px-4">
+                Page {page} of {totalPages}
+              </span>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setPage(p => Math.min(totalPages, p + 1))}
+                disabled={page === totalPages}
+              >
+                Next
+              </Button>
+            </div>
+          )}
           <div className="flex items-center gap-2">
             <span>Per page:</span>
             <Select value={String(perPage)} onValueChange={(v) => onPerPageChange(parseInt(v, 10))}>
@@ -481,31 +504,6 @@ export function PapersTable({
             </TableBody>
           </Table>
         </div>
-
-        {/* Pagination */}
-        {totalPages > 1 && (
-          <div className="flex items-center justify-center gap-2">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setPage(p => Math.max(1, p - 1))}
-              disabled={page === 1}
-            >
-              Previous
-            </Button>
-            <span className="text-sm text-muted-foreground px-4">
-              Page {page} of {totalPages}
-            </span>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setPage(p => Math.min(totalPages, p + 1))}
-              disabled={page === totalPages}
-            >
-              Next
-            </Button>
-          </div>
-        )}
       </div>
     </TooltipProvider>
   );
