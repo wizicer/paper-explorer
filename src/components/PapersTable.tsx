@@ -375,20 +375,19 @@ export function PapersTable({
 
                 return (
                   <>
-                    <TableRow key={paper.doi} className="group">
+                    <TableRow 
+                      key={paper.doi} 
+                      className="group cursor-pointer"
+                      onClick={() => toggleRow(paper.doi)}
+                    >
                       <TableCell className="p-2">
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          className="h-6 w-6 p-0"
-                          onClick={() => toggleRow(paper.doi)}
-                        >
+                        <div className="flex items-center">
                           {isExpanded ? (
                             <ChevronDown className="h-4 w-4" />
                           ) : (
                             <ChevronRight className="h-4 w-4" />
                           )}
-                        </Button>
+                        </div>
                       </TableCell>
                       <TableCell>
                         <div className="flex items-start gap-2">
@@ -400,6 +399,7 @@ export function PapersTable({
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   className="text-primary hover:text-primary/80"
+                                  onClick={(e) => e.stopPropagation()}
                                 >
                                   <ExternalLink className="h-4 w-4" />
                                 </a>
@@ -413,6 +413,7 @@ export function PapersTable({
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   className="text-muted-foreground hover:text-foreground"
+                                  onClick={(e) => e.stopPropagation()}
                                 >
                                   <Search className="h-4 w-4" />
                                 </a>
@@ -461,6 +462,7 @@ export function PapersTable({
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="text-lg hover:opacity-80"
+                                onClick={(e) => e.stopPropagation()}
                               >
                                 {categoryInfo.icon}
                               </a>
