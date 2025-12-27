@@ -473,19 +473,33 @@ export function PapersTable({
                     {isExpanded && (
                       <TableRow key={`${paper.doi}-details`}>
                         <TableCell colSpan={5} className="bg-muted/30 py-3">
-                          <div className="pl-10 space-y-2">
+                          <div className="pl-20 space-y-2">
                             <div className="text-sm">
-                              <span className="font-medium">Year:</span> {paper.year}
-                            </div>
-                            <div className="text-sm">
-                              <span className="font-medium">Authors:</span>
-                              <div className="flex flex-wrap gap-1 mt-1">
+                              <span className="font-medium">Authors:</span>{" "}
+                              <div className="inline-flex flex-wrap gap-1 mt-1">
                                 {paper.authors?.map((author, i) => (
                                   <Badge key={i} variant="outline" className="text-xs">
                                     {author}
                                   </Badge>
                                 ))}
                               </div>
+                            </div>
+                            <div className="text-sm">
+                              <span className="font-medium">Publisher:</span> {paper.publisher}
+                            </div>
+                            <div className="text-sm">
+                              <span className="font-medium">Type:</span> {paper.type}
+                            </div>
+                            <div className="text-sm">
+                              <span className="font-medium">DOI:</span>{" "}
+                              <a
+                                href={paper.doi}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-primary hover:text-primary/80 hover:underline"
+                              >
+                                {paper.doi}
+                              </a>
                             </div>
                           </div>
                         </TableCell>

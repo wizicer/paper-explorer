@@ -18,6 +18,7 @@ export interface CCFVenue {
 }
 
 export interface RawPaper {
+  type: string;
   title: string;
   doi: string;
   year: number;

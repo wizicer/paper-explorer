@@ -143,7 +143,7 @@ function App() {
             <div className="flex items-center gap-3">
               <BookOpen className="h-8 w-8 text-primary" />
               <div>
-                <h1 className="text-2xl font-bold">Blockchain Survey</h1>
+                <h1 className="text-2xl font-bold">Paper Explorer</h1>
                 <p className="text-sm text-muted-foreground">
                   Browse and filter academic papers
                 </p>
